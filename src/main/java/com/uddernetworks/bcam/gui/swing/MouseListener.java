@@ -30,8 +30,8 @@ public class MouseListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(MouseListener.class);
 
     private final SectionManager sectionManager;
+    private final Set<ImageSection> sectionBuffer = new HashSet<>();
     private Consumer<ImageSection> listener = $ -> {};
-    private Set<ImageSection> sectionBuffer = new HashSet<>();
 
     public MouseListener(JPanel panel, SectionManager sectionManager) {
         this.sectionManager = sectionManager;

@@ -48,7 +48,7 @@ public class KeyConverter {
     }
 
     public List<Integer> getKeyCombo(int ascii) {
-        return characters.get(ascii);
+        return characters.getOrDefault(ascii, Collections.singletonList(ascii));
     }
 
     private <K, V> Map<K, V> mapOf(Object... keyValues) {
