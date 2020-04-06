@@ -6,9 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.Executors;
@@ -26,7 +24,7 @@ public class CameraHandlerImpl implements CameraHandler {
     private final Map<Integer, Consumer<BufferedImage>> listeners = new HashMap<>();
 
     private int lastId = 0;
-    private double fps = 5;
+    private double fps = 30;
     private Webcam webcam;
     private ScheduledFuture<?> masterListener;
 
@@ -66,7 +64,7 @@ public class CameraHandlerImpl implements CameraHandler {
                 }
 
                 listeners.forEach((id, child) -> child.accept(webcam.getImage()));
-            }, 0, (long) (1000D / fps), TimeUnit.MILLISECONDS);
+            }, 0, 10, TimeUnit.MILLISECONDS);
         }
 
         listeners.put(++lastId, listener);

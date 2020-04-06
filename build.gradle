@@ -1,12 +1,15 @@
 plugins {
     id 'java'
     id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
 group 'com.uddernetworks.bcam'
 version '1.0.0-SNAPSHOT'
 
 mainClassName = 'com.uddernetworks.bcam.BCam'
+
+sourceCompatibility = 12
 
 repositories {
     mavenCentral()
@@ -15,15 +18,31 @@ repositories {
     }
 }
 
+configurations {
+    javafxCompile
+}
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     implementation 'org.slf4j:slf4j-api:1.7.25'
     implementation 'org.slf4j:slf4j-log4j12:1.7.25'
-
+    implementation 'com.1stleg:jnativehook:2.1.0'
     implementation 'com.github.sarxos:webcam-capture:0.3.13-SNAPSHOT'
+
+    javafxCompile 'org.openjfx:javafx-base:12.0.1:win'
+    javafxCompile 'org.openjfx:javafx-graphics:12.0.1:win'
+    javafxCompile 'org.openjfx:javafx-controls:12.0.1:win'
+    javafxCompile 'org.openjfx:javafx-fxml:12.0.1:win'
+
+    implementation configurations.javafxCompile
 }
 
 run {
     standardInput = System.in
+
+    jvmArgs("--add-opens", "java.base/jdk.internal.loader=ALL-UNNAMED")
+    jvmArgs("--add-opens", "java.base/java.io=ALL-UNNAMED")
+    jvmArgs("--add-opens", "java.base/java.util=ALL-UNNAMED")
+//    jvmArgs("--add-opens", "java.base/javafx.graphics=ALL-UNNAMED")
 }
