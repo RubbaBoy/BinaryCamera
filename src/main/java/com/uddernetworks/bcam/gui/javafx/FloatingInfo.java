@@ -1,4 +1,4 @@
-package com.uddernetworks.bcam;
+package com.uddernetworks.bcam.gui.javafx;
 
 import com.uddernetworks.bcam.output.BinaryController;
 import javafx.application.Platform;
@@ -34,8 +34,8 @@ public class FloatingInfo {
         hbox.setStyle(hboxStyle);
         hbox.setPadding(new Insets(5));
 
-        controller.onReset(() -> {
-            hbox.setStyle(hboxStyle + "-fx-border-color: red");
+        controller.onReset(success -> {
+            hbox.setStyle(hboxStyle + "-fx-border-color: " + (success ? "green" : "red"));
             CompletableFuture.runAsync(() -> {
                 sleep(500);
                 Platform.runLater(() -> hbox.setStyle(hboxStyle));

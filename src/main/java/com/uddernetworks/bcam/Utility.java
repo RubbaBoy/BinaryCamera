@@ -21,16 +21,6 @@ public class Utility {
         graphics.drawString(text.toString(), Double.valueOf(x).intValue(), Double.valueOf(y).intValue());
     }
 
-    public static byte[] toUnboxedBytes(Byte[] array) {
-        var out = new byte[array.length];
-
-        for (int i = 0; i < array.length; i++) {
-            out[i] = array[i];
-        }
-
-        return out;
-    }
-
     public static int binToDec(LinkedList<Boolean> input) {
         var num = 0;
 

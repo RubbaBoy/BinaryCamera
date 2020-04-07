@@ -1,6 +1,6 @@
 package com.uddernetworks.bcam.output;
 
-import com.uddernetworks.bcam.FloatingInfo;
+import com.uddernetworks.bcam.gui.javafx.FloatingInfo;
 import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,11 +34,9 @@ public class RobotOutput implements OutputHandler {
 
 
         lightQueue.listenMax(list -> {
-            floatingInfo.getController().reset();
+            floatingInfo.getController().reset(true);
 
             clearTimeout();
-
-            LOGGER.info("Got queue {}", list);
 
             var ascii = binToDec(list);
 
@@ -57,7 +55,7 @@ public class RobotOutput implements OutputHandler {
 
         if (!lightsOn) {
             var time = System.currentTimeMillis() - lastOff;
-            LOGGER.info("Light was on for {}ms", time);
+            LOGGER.debug("Light was on for {}ms", time);
             lightQueue.add(new ToggleState(time));
         } else {
             lastOff = System.currentTimeMillis();
@@ -81,7 +79,7 @@ public class RobotOutput implements OutputHandler {
                 LOGGER.info("Current character has been reset due to inactivity.");
                 lastOff = -1;
                 lightQueue.reset();
-                floatingInfo.getController().reset(true);
+                floatingInfo.getController().reset(false, true);
             } catch (InterruptedException ignored) {
             }
         });

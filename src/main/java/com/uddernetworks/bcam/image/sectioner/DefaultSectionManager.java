@@ -28,13 +28,7 @@ public class DefaultSectionManager implements SectionManager {
     private final int xCount = 19;
     private final int yCount = 10;
 
-    private final int imageWidth;
-    private final int imageHeight;
-
     public DefaultSectionManager(int imageWidth, int imageHeight) {
-        this.imageWidth = imageWidth;
-        this.imageHeight = imageHeight;
-
         sections.addAll(getAllSections(imageWidth, imageHeight).keySet());
     }
 

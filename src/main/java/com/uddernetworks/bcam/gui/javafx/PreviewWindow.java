@@ -59,7 +59,7 @@ public class PreviewWindow implements UserInterface, Initializable {
         this.lightsOnCallback = lightsOnCallback;
         this.lightsOffCallback = lightsOffCallback;
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Preview.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/SetupInterface.fxml"));
         loader.setController(this);
         root = loader.load();
 

@@ -21,7 +21,7 @@ public class BCam extends Application {
         stage.initStyle(StageStyle.TRANSPARENT);
 
         var handler = new CameraHandlerImpl();
-        var sectionManager = new DefaultSectionManager(1920, 1080);
+        var sectionManager = new DefaultSectionManager(960, 540);
         var processor = new DefaultImageProcessor(sectionManager);
 
         var setupHandler = new SetupHandler(stage, handler, processor, sectionManager);
@@ -42,7 +42,7 @@ public class BCam extends Application {
 
                     output.handleToggle(curr);
 
-                    LOGGER.info("Lights are now {}", curr ? "on" : "off");
+                    LOGGER.debug("Lights are now {}", curr ? "on" : "off");
                 });
             } catch (Exception e) {
                 LOGGER.error("Error after setup", e);

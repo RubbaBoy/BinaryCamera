@@ -6,13 +6,14 @@ import javafx.scene.control.Label;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 import static com.uddernetworks.bcam.Utility.sleep;
 
 public class BinaryController {
     private final LinkedList<Boolean> values = new LinkedList<>();
     private final Label[] labels;
-    private Runnable resetCallback;
+    private Consumer<Boolean> resetCallback;
 
     public BinaryController(Label[] labels) {
         this.labels = labels;
@@ -33,12 +34,12 @@ public class BinaryController {
         });
     }
 
-    public void onReset(Runnable resetCallback) {
+    public void onReset(Consumer<Boolean> resetCallback) {
         this.resetCallback = resetCallback;
     }
 
-    public void reset(boolean instant) {
-        resetCallback.run();
+    public void reset(boolean successful, boolean instant) {
+        resetCallback.accept(successful);
 
         if (instant) {
             values.clear();
@@ -49,16 +50,14 @@ public class BinaryController {
                 }
             });
         } else {
-            reset();
+            reset(successful);
         }
     }
 
-    public void reset() {
-        values.clear();
-
+    public void reset(boolean successful) {
         CompletableFuture.runAsync(() -> {
             sleep(750);
-            reset(true);
+            reset(successful, true);
         });
     }
 }

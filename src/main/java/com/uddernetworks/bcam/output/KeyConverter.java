@@ -3,12 +3,17 @@ package com.uddernetworks.bcam.output;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Converts ASCII codes to the {@link KeyEvent} VK constants. Some, such as uppercase characters, require the shift
+ * (0x10) modifier, which makes this a more tedious task.
+ */
 public class KeyConverter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KeyConverter.class);
