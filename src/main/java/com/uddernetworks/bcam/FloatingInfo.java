@@ -1,7 +1,7 @@
 package com.uddernetworks.bcam;
 
 import com.uddernetworks.bcam.output.BinaryController;
-import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,40 +10,38 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.Toolkit;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.IntStream;
 
 import static com.uddernetworks.bcam.Utility.sleep;
 
-public class FloatingInfo extends Application {
+public class FloatingInfo {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FloatingInfo.class);
-
-    private static FloatingInfo instance;
-    private static AtomicBoolean initialized = new AtomicBoolean();
 
     private final int paddingX = 10;
     private final int paddingY = 10;
     private final BinaryController controller = new BinaryController(createLabels(8));
 
-    public FloatingInfo() {
-        instance = this;
-        initialized.set(true);
-    }
-
-    @Override
     public void start(Stage stage) {
         var hbox = new HBox(controller.getLabels());
 
-        hbox.setStyle("-fx-background-color: #FFF");
+        var hboxStyle = "-fx-background-color: #FFF; -fx-border-width: 3px;";
+        hbox.setStyle(hboxStyle);
         hbox.setPadding(new Insets(5));
 
-        stage.initStyle(StageStyle.TRANSPARENT);
+        controller.onReset(() -> {
+            hbox.setStyle(hboxStyle + "-fx-border-color: red");
+            CompletableFuture.runAsync(() -> {
+                sleep(500);
+                Platform.runLater(() -> hbox.setStyle(hboxStyle));
+            });
+        });
+
         stage.setAlwaysOnTop(true);
 
         stage.setX(Toolkit.getDefaultToolkit().getScreenSize().getWidth() - 210 - paddingX);
@@ -79,20 +77,5 @@ public class FloatingInfo extends Application {
 
     public BinaryController getController() {
         return controller;
-    }
-
-    public static FloatingInfo getInstance() {
-        while (true) {
-            if (!initialized.get()) {
-                sleep(100);
-                continue;
-            }
-
-            return instance;
-        }
-    }
-
-    public static void launchStuff() {
-        launch();
     }
 }

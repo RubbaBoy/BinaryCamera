@@ -1,15 +1,12 @@
 package com.uddernetworks.bcam.image.sectioner;
 
 import com.uddernetworks.bcam.Utility;
-import com.uddernetworks.bcam.image.ProcessedImage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

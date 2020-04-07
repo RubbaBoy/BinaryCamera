@@ -13,7 +13,6 @@ import javax.swing.Timer;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
@@ -54,7 +53,6 @@ public class SwingPanel extends JPanel {
             actionMap.put("continue", new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent event) {
-                    LOGGER.info("Continuing");
                     callback.run();
                 }
             });

@@ -1,7 +1,6 @@
 package com.uddernetworks.bcam.gui;
 
 import com.uddernetworks.bcam.camera.CameraHandler;
-import com.uddernetworks.bcam.gui.swing.MouseListener;
 import com.uddernetworks.bcam.gui.swing.SwingPanel;
 import com.uddernetworks.bcam.image.sectioner.SectionManager;
 import org.slf4j.Logger;

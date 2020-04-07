@@ -12,6 +12,7 @@ import static com.uddernetworks.bcam.Utility.sleep;
 public class BinaryController {
     private final LinkedList<Boolean> values = new LinkedList<>();
     private final Label[] labels;
+    private Runnable resetCallback;
 
     public BinaryController(Label[] labels) {
         this.labels = labels;
@@ -32,7 +33,13 @@ public class BinaryController {
         });
     }
 
+    public void onReset(Runnable resetCallback) {
+        this.resetCallback = resetCallback;
+    }
+
     public void reset(boolean instant) {
+        resetCallback.run();
+
         if (instant) {
             values.clear();
 

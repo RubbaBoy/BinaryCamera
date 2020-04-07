@@ -2,9 +2,7 @@ package com.uddernetworks.bcam;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Utility {
 

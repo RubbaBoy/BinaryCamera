@@ -19,8 +19,6 @@ public class RobotController {
         CompletableFuture.runAsync(() -> {
             var keys = keyConverter.getKeyCombo(key);
 
-            System.out.println("keys = " + keys);
-
             for (var code : keys) {
                 robot.keyPress(code);
             }

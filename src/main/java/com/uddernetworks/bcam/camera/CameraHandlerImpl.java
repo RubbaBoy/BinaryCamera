@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -21,7 +22,7 @@ public class CameraHandlerImpl implements CameraHandler {
 
     private final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
-    private final Map<Integer, Consumer<BufferedImage>> listeners = new HashMap<>();
+    private final Map<Integer, Consumer<BufferedImage>> listeners = new ConcurrentHashMap<>();
 
     private int lastId = 0;
     private double fps = 30;
@@ -64,7 +65,7 @@ public class CameraHandlerImpl implements CameraHandler {
                 }
 
                 listeners.forEach((id, child) -> child.accept(webcam.getImage()));
-            }, 0, 10, TimeUnit.MILLISECONDS);
+            }, 0, 50, TimeUnit.MILLISECONDS);
         }
 
         listeners.put(++lastId, listener);

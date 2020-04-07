@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="960" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane maxHeight="600.0" maxWidth="960.0" minHeight="600.0" minWidth="960.0" prefHeight="600.0" prefWidth="960.0">
+         <bottom>
+            <HBox prefHeight="60.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="lightsOn" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="My lights are ON">
+                     <HBox.margin>
+                        <Insets left="12.5" top="12.5" />
+                     </HBox.margin></Button>
+                  <Button fx:id="lightsOff" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" text="My lights are OFF">
+                     <HBox.margin>
+                        <Insets left="12.5" top="12.5" />
+                     </HBox.margin></Button>
+                  <Label fx:id="toggleStatus" prefHeight="20.0" text="Click the correct button">
+                     <HBox.margin>
+                        <Insets left="30.0" top="20.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </bottom>
+         <center>
+            <ImageView fx:id="preview" fitHeight="540.0" fitWidth="960.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
