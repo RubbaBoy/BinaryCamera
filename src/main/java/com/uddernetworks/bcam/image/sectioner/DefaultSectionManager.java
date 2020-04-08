@@ -127,7 +127,6 @@ public class DefaultSectionManager implements SectionManager {
 
     @Override
     public Optional<ImageSection> getSection(int x, int y) {
-        LOGGER.info("Clicked at ({}, {}) mapped: ({}, {})", x, y, mapCoord(x, 960, imageWidth), mapCoord(y, 540, imageHeight));
         return sections.stream().filter(section -> section.isWithin(mapCoord(x, 960, imageWidth), mapCoord(y, 540, imageHeight))).findFirst();
     }
 
