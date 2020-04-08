@@ -21,7 +21,7 @@ public class BCam extends Application {
         stage.initStyle(StageStyle.TRANSPARENT);
 
         var handler = new CameraHandlerImpl();
-        var sectionManager = new DefaultSectionManager(960, 540);
+        var sectionManager = new DefaultSectionManager(handler.getCameraDimensions());
         var processor = new DefaultImageProcessor(sectionManager);
 
         var setupHandler = new SetupHandler(stage, handler, processor, sectionManager);

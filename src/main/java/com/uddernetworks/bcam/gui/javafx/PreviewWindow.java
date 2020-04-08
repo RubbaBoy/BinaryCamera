@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -115,12 +116,16 @@ public class PreviewWindow implements UserInterface, Initializable {
     }
 
     private void setupMouse() {
-        preview.setOnMouseClicked(this::handleEvent);
-        preview.setOnMouseDragged(this::handleEvent);
+        preview.setOnMouseClicked(event -> handleEvent(event).ifPresent(section -> {
+            sectionManager.toggleSection(section.getIndex());
+            updateImage();
+        }));
+
+        preview.setOnMouseDragged(event -> handleEvent(event).ifPresent(this::addSection));
     }
 
-    private void handleEvent(MouseEvent event) {
-        sectionManager.getSection((int) event.getX(), (int) event.getY()).ifPresent(this::addSection);
+    private Optional<ImageSection> handleEvent(MouseEvent event) {
+        return sectionManager.getSection((int) event.getX(), (int) event.getY());
     }
 
     private void addSection(ImageSection section) {

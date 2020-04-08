@@ -1,5 +1,6 @@
 package com.uddernetworks.bcam.camera;
 
+import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -47,6 +48,13 @@ public interface CameraHandler {
      * @param id The listener ID gotten via {@link #listenCamera(Consumer)}
      */
     void removeListener(int id);
+
+    /**
+     * Gets the real dimensions of the camera, initializing it if necessary.
+     *
+     * @return The active dimensions of the camera
+     */
+    Dimension getCameraDimensions();
 
     /**
      * Stops all listeners and webcam activity.

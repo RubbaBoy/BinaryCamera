@@ -78,6 +78,16 @@ public class CameraHandlerImpl implements CameraHandler {
     }
 
     @Override
+    public Dimension getCameraDimensions() {
+        if (!initWebcam()) {
+            LOGGER.error("Webcam could not be opened!");
+            return new Dimension(0, 0);
+        }
+
+        return webcam.getViewSize();
+    }
+
+    @Override
     public void stopListening() {
         executor.shutdown();
         masterListener.cancel(true);
